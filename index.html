@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+        <title>Shiela's Flowershop</title>
+        <link rel = "preconnect" href="https://fonts.googleapis.com">
+        <link rel = "preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href = "https://fonts.googleapis.com/css2?family=Amarante&family=Jacques+Francois+Shadow&family=Marmelad&family=Oswald:wght@500&family=Overlock+SC&family=Pompiere&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Port+Lligat+Sans&display=swap" rel="stylesheet">
+        <link rel = "stylesheet" href="style.css">
+        <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel = "stylesheet" href = "swiper-bundle.min.css">
+        <style>
+            *{
+                padding: 0;
+                box-sizing: border-box;
+                margin: 0;
+            }
+            .openbt{
+                font-size: 20px;
+                border-width: 1px;
+                border-style: solid;
+                border-top: 0;
+                border-left: 0;
+                border-bottom: 0;
+                padding-top: 13.6px;
+                padding-bottom: 12px;
+                padding-right: 10px;
+                cursor: pointer;
+                margin-left: 10px;
+            }
+            /* header */
+            .header{
+                background-color: white;
+                border-color: 1px, black;
+                border-style: solid;
+                border-width: 1px;
+                display: flex;
+            }
+            .tabs {
+                text-align: right;
+                flex: 1;
+                margin: 20px;
+                font-size: 15px;
+                font-family: 'Overlock SC';
+            }
+            .dropd {
+                position: relative;
+                display: inline-block;
+            }
+            .dcontent {
+                display: none;
+                position: absolute;
+                background-color: white;
+
+            }
+            .dcontent a {
+                text-align: left;
+                margin: 10px;
+                font-size: 15px;
+                font-family: 'Overlock SC';
+                display: block;
+                text-decoration: none;
+            }
+            .dropd:hover .dcontent {
+                display: block;
+            }
+            a {
+                margin-right: 85px;
+                text-decoration: none;
+            }
+            a:link {
+                padding: 0;
+                color: black;
+            }
+            a:hover {
+                padding: 0;
+                color: gray;
+            }
+            a:active {
+                padding: 0;
+                color: peachpuff;
+                text-decoration: underline  ;
+            }
+            .logo {
+                width: 26vw;
+                height: 4vw;
+            }
+            /* header end */
+            /* order container */
+            .ordcon {
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                padding: 20px;
+            }
+            input[type=text], select, textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                resize: none;
+            }
+            input[type=submit] {
+                background-color: #04AA6D;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+<body>
+    <div>
+        <header class = "header">        
+            <span  class = "openbt" onclick="opennav()"> &#9776; </span>     
+            <div class = "logo1">          
+            <img class = "logo" src = "img/logo.png" alt = "SF">
+            </div>
+            <div class = "tabs">
+            <ul>
+                <a href= "#">Home</a>
+                <div class = "dropd">
+                    <a href= "#">Products+</a>
+                    <ul class = "dcontent">
+                        <a href="#">Boquets</a>
+                        <a href="#">Wreaths</a>
+                        <a href="#">Tombstones</a>
+                    </ul>
+                </div>
+                <a href= "About Us.html">About Us</a>
+                <a href="#footer">Contact Us</a>  
+            </ul>
+            </div>
+        </header>
+    </div>
+    <div style = "width: 15px; border-bottom: 1px transparent;">&nbsp;</div>
+    <div class = "ordcon">
+        <form method = "POST" id = "contact_form" action = "Contact Us.php">
+
+            <label for="fname">Full Name</label>
+            <input type="text" id="fname" name="fullname" placeholder="Your name..">
+        
+            <label for="pnum">Phone Number</label>
+            <input type="text" id="pnum" name="phonenum" placeholder="Your phone number..">
+        
+            <label for="emailadd">Email Address</label>
+            <input type="text" id="emailadd" name="emailadd"  placeholder="Your email address...">
+        
+            <label for="ordertype">Order Type</label>
+            <select id="ordertype" name="ordertype">
+            <option value="boquet">Boquet</option>
+            <option value="wreath">Wreath</option>
+            <option value="tombstone">Tombstone</option>
+            </select>
+    
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Information about your order..." style="height:200px"></textarea>
+        
+            <input type="submit" value="Submit">
+        
+          </form>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+    <script>
+        const constraints = {
+            name: {
+                presence: { allowEmpty: false }
+            },
+            email: {
+                presence: { allowEmpty: false },
+                email: true
+            },
+            message: {
+                presence: { allowEmpty: false }
+            }
+        };
+     
+        const form = document.getElementById('contact-form');
+     
+        form.addEventListener('submit', function (event) {
+          const formValues = {
+              name: form.elements.name.value,
+              email: form.elements.email.value,
+              message: form.elements.message.value
+          };
+     
+          const errors = validate(formValues, constraints);
+     
+          if (errors) {
+            event.preventDefault();
+            const errorMessage = Object
+                .values(errors)
+                .map(function (fieldValues) { return fieldValues.join(', ')})
+                .join("\n");
+     
+            alert(errorMessage);
+          }
+        }, false);
+     </script>
+</body>
+</html>
